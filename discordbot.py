@@ -4,8 +4,10 @@ from asyncio import sleep
 
 client = discord.Client()
 
+"""
 if not discord.opus.is_loaded():
     discord.opus.load_opus("heroku-buildpack-libopus")
+    """
 
 @client.event
 async def on_ready():
