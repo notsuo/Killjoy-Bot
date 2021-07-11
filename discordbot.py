@@ -36,13 +36,11 @@ async def on_message(message):
 
                 await message.channel.send(member.mention)
 
-            message.guild.voice_client.play(discord.FFmpegPCMAudio('YouShouldRun.mp3'))
-            print(str(message.guild.voice_client.is_playing()))
+            message.guild.voice_client.play(discord.FFmpegPCMAudio('逃げたほうがいいかもね.wav'))
             while message.guild.voice_client.is_playing():
-                await sleep(1)
+                await sleep(0.1)
             for member in message.author.voice.channel.members:
                 await member.move_to(None)
-
             await message.guild.voice_client.disconnect()
             return
 
