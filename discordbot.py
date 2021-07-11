@@ -4,6 +4,8 @@ from asyncio import sleep
 
 client = discord.Client()
 
+if not discord.opus.is_loaded():
+    discord.opus.load_opus("heroku-buildpack-libopus")
 
 @client.event
 async def on_ready():
@@ -40,7 +42,7 @@ async def on_message(message):
             message.guild.voice_client.play(discord.FFmpegPCMAudio('YouShouldRun.mp3'))
             print(str(message.guild.voice_client.is_playing()))
             while message.guild.voice_client.is_playing():
-                await sleep(0.1)
+                await sleep(1)
             for member in message.author.voice.channel.members:
                 await member.move_to(None)
 
