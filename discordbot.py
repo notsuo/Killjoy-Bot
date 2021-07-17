@@ -5,6 +5,7 @@ from asyncio import sleep
 client = discord.Client()
 
 @client.event
+#起動時処理
 async def on_ready():
     for channel in client.get_all_channels():
         print("----------")
@@ -14,6 +15,7 @@ async def on_ready():
 
 
 @client.event
+#メッセージを受け取って起動
 async def on_message(message):
     if message.author.bot:
         return
@@ -21,6 +23,7 @@ async def on_message(message):
     if message.content == '/neko':
         await message.channel.send('にゃーん')
 
+    #強制切断bot
     if message.content == '!kj ult':
 
         if message.author.voice is None:
@@ -45,6 +48,13 @@ async def on_message(message):
             return
 
         await message.channel.send("アルティメットはまだ！")
+"""
+@client.event
+async def on_voice_state_update(member, before, after):
+    if before.channel != after.channel:
+        botRoom = client.get_channel(os.environ["CHANNEL_ID"])
+        voiceChannelIds = [vc for vc in client.get_all_channels().id if ]
+"""
 
 
 client.run(os.environ["DISCORD_TOKEN"])
