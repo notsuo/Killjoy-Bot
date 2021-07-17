@@ -2,8 +2,7 @@ import discord
 import os
 from asyncio import sleep
 
-Intents = discord.Intents.default()
-Intents.messages = True
+Intents = discord.Intents.all()
 client = discord.Client(intents=Intents)
 
 
