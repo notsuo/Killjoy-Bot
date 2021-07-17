@@ -32,24 +32,24 @@ async def on_message(message):
             await message.channel.send("アルティメット準備中")
             return
 
-        if message.guild.voice_client is None:
-            await message.author.voice.channel.connect()
-
-            for member in message.author.voice.channel.members:
-                if member.bot:
-                    continue
-
-                await message.channel.send(member.mention)
-
-            message.guild.voice_client.play(discord.FFmpegPCMAudio('逃げたほうがいいかもね.wav'))
-            while message.guild.voice_client.is_playing():
-                await sleep(0.1)
-            for member in message.author.voice.channel.members:
-                await member.move_to(None)
-            await message.guild.voice_client.disconnect()
+        if message.guild.voice_client is not None:
+            await message.channel.send("アルティメットはまだ！")
             return
 
-        await message.channel.send("アルティメットはまだ！")
+        await message.author.voice.channel.connect()
+
+        for member in message.author.voice.channel.members:
+            if member.bot:
+                continue
+
+            await message.channel.send(member.mention)
+
+        message.guild.voice_client.play(discord.FFmpegPCMAudio('逃げたほうがいいかもね.wav'))
+        while message.guild.voice_client.is_playing():
+            await sleep(0.1)
+        await message.guild.voice_client.disconnect()
+        for member in message.author.voice.channel.members:
+            await member.move_to(None)
 
 
 """
