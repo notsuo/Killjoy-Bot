@@ -52,12 +52,4 @@ async def on_message(message):
             await member.move_to(None)
 
 
-"""
-@client.event
-async def on_voice_state_update(member, before, after):
-    if before.channel != after.channel:
-        botRoom = client.get_channel(os.environ["CHANNEL_ID"])
-        voiceChannelIds = [vc for vc in client.get_all_channels().id if ]
-"""
-
 client.run(os.environ["DISCORD_TOKEN"])
