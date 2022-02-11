@@ -54,9 +54,10 @@ async def on_message(message):
         for member in message.author.voice.channel.members:
             await member.move_to(None)
 
-    # ランダムキャラピックbot
+    # ランダムロールピックbot
     if message.content == '!rdm role':
         role = copy.copy(characterData.role)
+
         for member in message.author.voice.channel.members:
             if member.bot:
                 continue
@@ -64,6 +65,35 @@ async def on_message(message):
             chosenRole = random.choice(role)
             await message.channel.send(member.mention)
             await message.channel.send(chosenRole)
+            role.remove(chosenRole)
+
+    # ランダムキャラピックbot
+    if message.content == 'rdm chr':
+        role = copy.copy(characterData.role)
+        duelist = copy.copy(characterData.duelist)
+        controller = copy.copy(characterData.controller)
+        initiator = copy.copy(characterData.initiator)
+        sentinel = copy.copy(characterData.sentinel)
+
+        for member in message.author.voice.channel.members:
+            if member.bot:
+                continue
+
+            chosenRole = random.choice(role)
+
+            await message.channel.send(member.mention)
+            if chosenRole == "デュエリスト":
+                await message.channel.send(random.choice(duelist))
+
+            elif chosenRole == "コントローラー":
+                await message.channel.send(random.choice(controller))
+
+            elif chosenRole == "イニシエーター":
+                await message.channel.send(random.choice(initiator))
+
+            elif chosenRole == "センチネル":
+                await message.channel.send(random.choice(sentinel))
+
             role.remove(chosenRole)
 
 
