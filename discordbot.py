@@ -68,7 +68,7 @@ async def on_message(message):
             role.remove(chosenRole)
 
     # ランダムキャラピックbot
-    if message.content == 'rdm chr':
+    if message.content == '!rdm chr':
         role = copy.copy(characterData.role)
         duelist = copy.copy(characterData.duelist)
         controller = copy.copy(characterData.controller)
