@@ -1,6 +1,9 @@
+import random
+
 import discord
 import os
 from asyncio import sleep
+import characterData
 
 Intents = discord.Intents.all()
 client = discord.Client(intents=Intents)
@@ -50,6 +53,18 @@ async def on_message(message):
         await message.guild.voice_client.disconnect()
         for member in message.author.voice.channel.members:
             await member.move_to(None)
+
+    # ランダムキャラピックbot
+    if message.content == '!rdm role':
+        role = characterData.role
+        for member in message.author.voice.channel.members:
+            if member.bot:
+                continue
+
+            chosenRole = random.choice(role)
+            await message.channel.send(member.mention, chosenRole)
+            role.remove(chosenRole)
+
 
 
 client.run(os.environ["DISCORD_TOKEN"])
