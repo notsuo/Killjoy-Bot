@@ -1,5 +1,5 @@
+import copy
 import random
-
 import discord
 import os
 from asyncio import sleep
@@ -56,7 +56,7 @@ async def on_message(message):
 
     # ランダムキャラピックbot
     if message.content == '!rdm role':
-        role = characterData.role
+        role = copy.copy(characterData.role)
         for member in message.author.voice.channel.members:
             if member.bot:
                 continue
