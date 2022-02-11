@@ -62,7 +62,8 @@ async def on_message(message):
                 continue
 
             chosenRole = random.choice(role)
-            await message.channel.send(member.mention, chosenRole)
+            await message.channel.send(member.mention)
+            await message.channel.send(chosenRole)
             role.remove(chosenRole)
 
 
